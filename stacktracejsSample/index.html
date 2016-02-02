@@ -13,9 +13,9 @@
 
 <input type="button" onclick="buttonClick()" value="Causa Errore"/>
 <div>
-    <label id="error" class="labelRed"></label>
+    <label id="error" class="labelColor"></label>
+    <label id="errorTime" class="labelColor"></label>
 </div>
-<!--<input type="text" color="red" id="error" value="" />-->
 
 <script>
     window.onerror = function (msg, file, line, col, error) {
@@ -32,7 +32,8 @@
             return sf.toString();
         }).join('\n');
         //document.write(stringifiedStack);
-        document.getElementById("error").textContent = stringifiedStack ;
+        document.getElementById("error").textContent = stringifiedStack;
+        document.getElementById("errorTime").textContent = Date();
     };
 
     var errback = function (err) {
