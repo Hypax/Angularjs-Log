@@ -1,0 +1,46 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="js/stacktrace.min.js"></script>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
+    
+    <script src="https://raw.githubusercontent.com/stacktracejs/stacktrace-gps/master/dist/stacktrace-gps.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+
+<input type="button" onclick="buttonClick()" value="Causa Errore"/>
+<div>
+    <label id="error" class="labelRed"></label>
+</div>
+<!--<input type="text" color="red" id="error" value="" />-->
+
+<script>
+    window.onerror = function (msg, file, line, col, error) {
+        // callback is called with an Array[StackFrame]
+        StackTrace.fromError(error).then(callback).catch(errback);
+    };
+
+    function buttonClick() {
+        var x = y;
+    };
+
+    var callback = function (stackframes) {
+        var stringifiedStack = stackframes.map(function (sf) {
+            return sf.toString();
+        }).join('\n');
+        //document.write(stringifiedStack);
+        document.getElementById("error").textContent = stringifiedStack ;
+    };
+
+    var errback = function (err) {
+        console.log(err.message);
+    };
+    
+    var gps = new StackTraceGPS();
+    //gps.pinpoint
+</script>
+
+</html>
